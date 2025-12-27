@@ -23,11 +23,29 @@ npm start             # Run demo
 npm run build         # Compile TypeScript
 ```
 
-## Test Coverage
+## Expected Results
 
+### Running Tests (`npm test`)
+- ✅ **108 tests passing** across 7 test suites
+- Completes in ~2-3 seconds
+- No errors or warnings
+
+### Running Coverage (`npm run test:coverage`)
 ```
 All files: 88.65% Statements | 89.07% Branches | 85.86% Functions | 92.95% Lines
 ```
+- ✅ All metrics exceed 85% requirement
+- Generates HTML coverage report in `coverage/` folder
+
+### Running Demo (`npm start`)
+Displays:
+- Document creation examples (PDF, Word, HTML)
+- Car configuration examples (Custom, Economy, Luxury, Sports, Electric)
+- Car Management System demo with document generation
+
+### Building (`npm run build`)
+- ✅ Successful TypeScript compilation
+- Output in `dist/` folder
 
 ## Quick Examples
 
@@ -81,5 +99,3 @@ src/
 - TypeScript 5.9.3
 - Jest 30.2.0
 - Node.js
-
-
