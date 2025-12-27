@@ -52,7 +52,7 @@ Displays:
 ### Document Editor (Factory Pattern)
 
 ```typescript
-import { DocumentEditor, DocumentType } from './document-editor';
+import { DocumentEditor, DocumentType } from './src/document-editor';
 
 const editor = new DocumentEditor();
 editor.createNewDocument(DocumentType.PDF, 'Content here');
@@ -63,7 +63,7 @@ editor.saveDocument('output.pdf');
 ### Car Configuration (Builder Pattern)
 
 ```typescript
-import { CarBuilder, EngineType, TransmissionType } from './car-configuration';
+import { CarBuilder, EngineType, TransmissionType } from './src/car-configuration';
 
 const car = new CarBuilder()
   .setModel('Sports Car')
@@ -76,7 +76,8 @@ const car = new CarBuilder()
 ### Car Management System (Bonus)
 
 ```typescript
-import { CarManagementSystem } from './car-management-system';
+import { CarManagementSystem } from './src/car-management-system';
+import { DocumentType } from './src/document-editor';
 
 const cms = new CarManagementSystem();
 cms.addCar('car-001', car);
