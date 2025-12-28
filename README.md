@@ -1,102 +1,72 @@
-# Design Patterns Assignment
+# Car Management System
 
-Implementation of **Factory Pattern** and **Builder Pattern** in TypeScript with 85%+ test coverage.
+Spring Boot application demonstrating 4 Creational Design Patterns.
 
-## Overview
+## Design Patterns
 
-1. **Document Editor** - Factory Pattern for creating PDF, Word, and HTML documents
-2. **Car Configuration** - Builder Pattern for step-by-step car configuration
-3. **Car Management System** (Bonus) - Combines both patterns
+### 1. Singleton Pattern
+DocumentManager - Single instance manages all documents with thread-safe double-checked locking
 
-## Installation
+### 2. Factory Method Pattern
+Document editor supporting PDF, Word, and HTML formats
+
+### 3. Abstract Factory Pattern
+UI component factory for Modern and Classic themes
+
+### 4. Builder Pattern
+Car configuration with customizable options (engine, transmission, interior, exterior, safety features)
+
+### 5. Combined System (Bonus)
+Integrates all patterns - Build cars, generate documents, store in Singleton
+
+## Requirements
+
+- Java 21
+- Maven 3.6+
+
+## Build & Run
 
 ```bash
-npm install
+cd Assignment-1
+.\build.bat
+.\run.bat
 ```
 
-## Usage
+Application starts on http://localhost:8080
+
+## Testing
+
+### Web Interface
+Open browser: http://localhost:8080
+
+Test each pattern using the web interface:
+- **Singleton** - Get document count, clear documents
+- **Factory Method** - Create PDF/Word/HTML documents
+- **Abstract Factory** - Create Modern/Classic UI components
+- **Builder** - Build cars with various features
+- **Combined System** - Create car and generate document
+
+### Unit Tests
 
 ```bash
-npm test              # Run tests
-npm run test:coverage # Run tests with coverage
-npm start             # Run demo
-npm run build         # Compile TypeScript
+.\run.bat test
 ```
 
-## Expected Results
+Expected: 49 tests passing, 0 failures
 
-### Running Tests (`npm test`)
-- ✅ **108 tests passing** across 7 test suites
-- Completes in ~2-3 seconds
-- No errors or warnings
+## Implementation
 
-### Running Coverage (`npm run test:coverage`)
-```
-All files: 88.65% Statements | 89.07% Branches | 85.86% Functions | 92.95% Lines
-```
-- ✅ All metrics exceed 85% requirement
-- Generates HTML coverage report in `coverage/` folder
+**Exercise 1 - Document Editor**
+- Factory Method pattern
+- PDF, Word, HTML formats
+- Extensible for new formats
 
-### Running Demo (`npm start`)
-Displays:
-- Document creation examples (PDF, Word, HTML)
-- Car configuration examples (Custom, Economy, Luxury, Sports, Electric)
-- Car Management System demo with document generation
+**Exercise 2 - Car Configuration**
+- Builder pattern with Lombok
+- All required options (engine, transmission, interior, exterior, safety)
+- Flexible step-by-step configuration
 
-### Building (`npm run build`)
-- ✅ Successful TypeScript compilation
-- Output in `dist/` folder
-
-## Quick Examples
-
-### Document Editor (Factory Pattern)
-
-```typescript
-import { DocumentEditor, DocumentType } from './src/document-editor';
-
-const editor = new DocumentEditor();
-editor.createNewDocument(DocumentType.PDF, 'Content here');
-editor.addMetadata('author', 'John Doe');
-editor.saveDocument('output.pdf');
-```
-
-### Car Configuration (Builder Pattern)
-
-```typescript
-import { CarBuilder, EngineType, TransmissionType } from './src/car-configuration';
-
-const car = new CarBuilder()
-  .setModel('Sports Car')
-  .setEngine(EngineType.V8)
-  .setTransmission(TransmissionType.AUTOMATIC)
-  .setExteriorOptions({ color: 'Red' })
-  .build();
-```
-
-### Car Management System (Bonus)
-
-```typescript
-import { CarManagementSystem } from './src/car-management-system';
-import { DocumentType } from './src/document-editor';
-
-const cms = new CarManagementSystem();
-cms.addCar('car-001', car);
-cms.generateCarDocument('car-001', DocumentType.HTML);
-cms.generateFleetDocument(DocumentType.PDF);
-```
-
-## Project Structure
-
-```
-src/
-├── document-editor/        # Factory Pattern implementation
-├── car-configuration/      # Builder Pattern implementation
-├── car-management-system/  # Combined system
-└── __tests__/             # Unit tests (108 tests)
-```
-
-## Technologies
-
-- TypeScript 5.9.3
-- Jest 30.2.0
-- Node.js
+**Bonus Tasks**
+- 49 unit tests with 85%+ coverage
+- Combined Car Management System
+- Web interface for interactive testing
