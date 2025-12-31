@@ -21,7 +21,7 @@ Integrates all patterns - Build cars, generate documents, store in Singleton
 
 ## Requirements
 
-- Java 21
+- Java 17
 - Maven 3.6+
 
 ## Build & Run
