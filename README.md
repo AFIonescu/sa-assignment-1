@@ -140,7 +140,7 @@ Coverage report available at: `target/site/jacoco/index.html`
 ### Test Coverage
 - Factory Pattern: 100%
 - Service Layer: 96%
-- Overall: 82%
+- **Overall: 88%** 
 
 ## Unit Tests
 
@@ -151,4 +151,5 @@ Coverage report available at: `target/site/jacoco/index.html`
 | `DocumentServiceTest` | 6 | Document service tests |
 | `CarServiceTest` | 5 | Car service tests |
 | `CarDocumentServiceTest` | 5 | Combined solution tests |
-| **Total** | **30** | |
+| `DocumentControllerTest` | 4 | Controller endpoint tests |
+| **Total** | **34** | |
