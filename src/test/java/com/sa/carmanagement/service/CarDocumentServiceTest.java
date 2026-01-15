@@ -3,8 +3,6 @@ package com.sa.carmanagement.service;
 import com.sa.carmanagement.builder.Car;
 import com.sa.carmanagement.dto.DocumentResponse;
 import com.sa.carmanagement.factory.DocumentFactory;
-import com.sa.carmanagement.singleton.DocumentManager;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,12 +20,6 @@ class CarDocumentServiceTest {
         documentService = new DocumentService(documentFactory);
         carService = new CarService();
         carDocumentService = new CarDocumentService(carService, documentService);
-        DocumentManager.getInstance().clearDocuments();
-    }
-
-    @AfterEach
-    void tearDown() {
-        DocumentManager.getInstance().clearDocuments();
     }
 
     @Test

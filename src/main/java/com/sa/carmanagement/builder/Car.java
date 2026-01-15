@@ -15,6 +15,7 @@ public class Car {
     private final boolean hasGPS;
     private final boolean hasSoundSystem;
     private final String color;
+    private final String rims;
     private final boolean hasSunroof;
     private final boolean hasABS;
     private final boolean hasAirbags;

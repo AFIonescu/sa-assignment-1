@@ -4,11 +4,11 @@ import com.sa.carmanagement.dto.CreateDocumentRequest;
 import com.sa.carmanagement.dto.DocumentResponse;
 import com.sa.carmanagement.factory.Document;
 import com.sa.carmanagement.factory.DocumentFactory;
-import com.sa.carmanagement.singleton.DocumentManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class DocumentService {
 
     private final DocumentFactory documentFactory;
+    private final List<Document> documents = new ArrayList<>();
 
     public DocumentResponse createDocument(CreateDocumentRequest request) {
         log.info("DocumentService: Creating document - Type: {}", request.getType());
@@ -26,8 +27,8 @@ public class DocumentService {
         Document document = documentFactory.createDocument(request.getType());
         document.save(request.getContent());
 
-        // Use Singleton pattern to store document
-        DocumentManager.getInstance().addDocument(document);
+        // Store document
+        documents.add(document);
 
         return new DocumentResponse(
                 document.getFormat(),
@@ -39,7 +40,7 @@ public class DocumentService {
     public List<DocumentResponse> getAllDocuments() {
         log.info("DocumentService: Retrieving all documents");
 
-        return DocumentManager.getInstance().getAllDocuments().stream()
+        return documents.stream()
                 .map(doc -> new DocumentResponse(
                         doc.getFormat(),
                         null,
@@ -49,11 +50,11 @@ public class DocumentService {
     }
 
     public int getDocumentCount() {
-        return DocumentManager.getInstance().getDocumentCount();
+        return documents.size();
     }
 
     public void clearAllDocuments() {
         log.info("DocumentService: Clearing all documents");
-        DocumentManager.getInstance().clearDocuments();
+        documents.clear();
     }
 }

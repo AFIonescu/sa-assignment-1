@@ -46,6 +46,9 @@ public class CarDocumentService {
         description.append("- Sound System: ").append(car.isHasSoundSystem() ? "Yes" : "No").append("\n");
 
         description.append("\nExterior Features:\n");
+        if (car.getRims() != null && !car.getRims().isEmpty()) {
+            description.append("- Rims: ").append(car.getRims()).append("\n");
+        }
         description.append("- Sunroof: ").append(car.isHasSunroof() ? "Yes" : "No").append("\n");
 
         description.append("\nSafety Features:\n");

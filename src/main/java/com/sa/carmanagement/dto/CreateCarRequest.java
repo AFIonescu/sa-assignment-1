@@ -22,6 +22,7 @@ public class CreateCarRequest {
     private boolean hasGPS;
     private boolean hasSoundSystem;
     private String color;
+    private String rims;
     private boolean hasSunroof;
     private boolean hasABS;
     private boolean hasAirbags;

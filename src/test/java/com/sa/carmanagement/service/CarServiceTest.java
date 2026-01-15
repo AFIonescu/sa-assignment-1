@@ -29,6 +29,7 @@ class CarServiceTest {
                 true,
                 true,
                 "Black",
+                "19-inch Alloy",
                 true,
                 true,
                 true,
@@ -45,6 +46,7 @@ class CarServiceTest {
         assertTrue(car.isHasGPS());
         assertTrue(car.isHasSoundSystem());
         assertEquals("Black", car.getColor());
+        assertEquals("19-inch Alloy", car.getRims());
         assertTrue(car.isHasSunroof());
         assertTrue(car.isHasABS());
         assertTrue(car.isHasAirbags());
@@ -61,6 +63,7 @@ class CarServiceTest {
                 false,
                 false,
                 null,
+                null,
                 false,
                 false,
                 false,
@@ -73,12 +76,13 @@ class CarServiceTest {
         assertEquals("Toyota Camry", car.getModel());
         assertFalse(car.isHasLeatherSeats());
         assertFalse(car.isHasGPS());
+        assertNull(car.getRims());
     }
 
     @Test
     void testGetAllCars() {
-        CreateCarRequest request1 = new CreateCarRequest("Car 1", "V6", "Auto", false, false, false, null, false, false, false, false);
-        CreateCarRequest request2 = new CreateCarRequest("Car 2", "V8", "Manual", false, false, false, null, false, false, false, false);
+        CreateCarRequest request1 = new CreateCarRequest("Car 1", "V6", "Auto", false, false, false, null, null, false, false, false, false);
+        CreateCarRequest request2 = new CreateCarRequest("Car 2", "V8", "Manual", false, false, false, null, null, false, false, false, false);
 
         carService.createCar(request1);
         carService.createCar(request2);
@@ -92,7 +96,7 @@ class CarServiceTest {
     void testGetCarCount() {
         assertEquals(0, carService.getCarCount());
 
-        CreateCarRequest request = new CreateCarRequest("Test", "V6", "Auto", false, false, false, null, false, false, false, false);
+        CreateCarRequest request = new CreateCarRequest("Test", "V6", "Auto", false, false, false, null, null, false, false, false, false);
         carService.createCar(request);
 
         assertEquals(1, carService.getCarCount());
@@ -100,7 +104,7 @@ class CarServiceTest {
 
     @Test
     void testClearAllCars() {
-        CreateCarRequest request = new CreateCarRequest("Test", "V6", "Auto", false, false, false, null, false, false, false, false);
+        CreateCarRequest request = new CreateCarRequest("Test", "V6", "Auto", false, false, false, null, null, false, false, false, false);
         carService.createCar(request);
 
         assertEquals(1, carService.getCarCount());

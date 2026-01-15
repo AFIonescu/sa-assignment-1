@@ -26,6 +26,7 @@ public class CarService {
                 .hasGPS(request.isHasGPS())
                 .hasSoundSystem(request.isHasSoundSystem())
                 .color(request.getColor())
+                .rims(request.getRims())
                 .hasSunroof(request.isHasSunroof())
                 .hasABS(request.isHasABS())
                 .hasAirbags(request.isHasAirbags())

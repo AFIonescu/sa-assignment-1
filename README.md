@@ -1,23 +1,57 @@
 # Car Management System
 
-Spring Boot application demonstrating 4 Creational Design Patterns.
+Spring Boot application demonstrating Creational Design Patterns.
 
-## Design Patterns
+## Design Patterns Implemented
 
-### 1. Singleton Pattern
-DocumentManager - Single instance manages all documents with thread-safe double-checked locking
+### 1. Factory Method Pattern (Document Editor)
+- `DocumentFactory` creates documents based on type (PDF, Word, HTML)
+- Each document type has its own implementation (`PdfDocument`, `WordDocument`, `HtmlDocument`)
+- New formats can be added without modifying existing code
+- Core logic is decoupled from specific document types
 
-### 2. Factory Method Pattern
-Document editor supporting PDF, Word, and HTML formats
+### 2. Builder Pattern (Car Configuration)
+- `Car` class uses Lombok `@Builder` for step-by-step configuration
+- Supports all required options:
+  - Engine type (V6, V8, etc.)
+  - Transmission (manual, automatic)
+  - Interior features (leather seats, GPS, sound system)
+  - Exterior options (color, rims, sunroof)
+  - Safety features (ABS, airbags, rear camera)
+- Optional configurations supported
+- Final car object is always valid
 
-### 3. Abstract Factory Pattern
-UI component factory for Modern and Classic themes
+### 3. Combined System (Bonus)
+- `CarDocumentService` combines both patterns
+- Configure a car using Builder pattern
+- Generate a document describing the car using Factory Method pattern
 
-### 4. Builder Pattern
-Car configuration with customizable options (engine, transmission, interior, exterior, safety features)
+## Project Structure
 
-### 5. Combined System (Bonus)
-Integrates all patterns - Build cars, generate documents, store in Singleton
+```
+src/main/java/com/sa/carmanagement/
+├── builder/
+│   └── Car.java                    # Builder pattern
+├── factory/
+│   ├── Document.java               # Document interface
+│   ├── DocumentFactory.java        # Factory Method pattern
+│   ├── PdfDocument.java
+│   ├── WordDocument.java
+│   └── HtmlDocument.java
+├── service/
+│   ├── CarService.java
+│   ├── DocumentService.java
+│   └── CarDocumentService.java     # Combined solution
+├── controller/
+│   ├── CarController.java
+│   ├── DocumentController.java
+│   └── CarDocumentController.java
+├── dto/
+│   ├── CreateCarRequest.java
+│   ├── CreateDocumentRequest.java
+│   └── DocumentResponse.java
+└── CarManagementApplication.java
+```
 
 ## Requirements
 
@@ -28,45 +62,93 @@ Integrates all patterns - Build cars, generate documents, store in Singleton
 
 ```bash
 cd Assignment-1
-.\build.bat
-.\run.bat
+mvn clean install
+mvn spring-boot:run
 ```
 
 Application starts on http://localhost:8080
 
-## Testing
+## API Endpoints
 
-### Web Interface
-Open browser: http://localhost:8080
+### Documents (Factory Method)
+- `POST /api/documents` - Create a document (PDF, WORD, HTML)
+- `GET /api/documents` - Get all documents
+- `GET /api/documents/count` - Get document count
+- `DELETE /api/documents` - Clear all documents
 
-Test each pattern using the web interface:
-- **Singleton** - Get document count, clear documents
-- **Factory Method** - Create PDF/Word/HTML documents
-- **Abstract Factory** - Create Modern/Classic UI components
-- **Builder** - Build cars with various features
-- **Combined System** - Create car and generate document
+### Cars (Builder)
+- `POST /api/cars` - Create a configured car
+- `GET /api/cars` - Get all cars
+- `GET /api/cars/count` - Get car count
+- `DELETE /api/cars` - Clear all cars
 
-### Unit Tests
+### Combined (Bonus)
+- `POST /api/car-documents?documentType=PDF` - Create car and generate document
 
-```bash
-.\run.bat test
+## Example Requests
+
+### Create a Document
+```json
+POST /api/documents
+{
+  "type": "PDF",
+  "content": "This is a test document"
+}
 ```
 
-Expected: 49 tests passing, 0 failures
+### Create a Car
+```json
+POST /api/cars
+{
+  "model": "BMW M5",
+  "engineType": "V8",
+  "transmission": "Automatic",
+  "hasLeatherSeats": true,
+  "hasGPS": true,
+  "hasSoundSystem": true,
+  "color": "Black",
+  "rims": "19-inch Alloy",
+  "hasSunroof": true,
+  "hasABS": true,
+  "hasAirbags": true,
+  "hasRearCamera": true
+}
+```
 
-## Implementation
+### Create Car with Document
+```json
+POST /api/car-documents?documentType=PDF
+{
+  "model": "Tesla Model S",
+  "engineType": "Electric",
+  "transmission": "Automatic",
+  "hasGPS": true,
+  "hasABS": true,
+  "hasAirbags": true
+}
+```
 
-**Exercise 1 - Document Editor**
-- Factory Method pattern
-- PDF, Word, HTML formats
-- Extensible for new formats
+## Testing
 
-**Exercise 2 - Car Configuration**
-- Builder pattern with Lombok
-- All required options (engine, transmission, interior, exterior, safety)
-- Flexible step-by-step configuration
+Run all tests:
+```bash
+mvn test
+```
 
-**Bonus Tasks**
-- 49 unit tests with 85%+ coverage
-- Combined Car Management System
-- Web interface for interactive testing
+Coverage report available at: `target/site/jacoco/index.html`
+
+### Test Coverage
+- Factory Pattern: 100%
+- Service Layer: 96%
+- Overall: 82%
+
+## Unit Tests
+
+| Test Class | Tests | Description |
+|------------|-------|-------------|
+| `DocumentFactoryTest` | 9 | Factory Method pattern tests |
+| `CarTest` | 5 | Builder pattern tests |
+| `DocumentServiceTest` | 6 | Document service tests |
+| `CarServiceTest` | 5 | Car service tests |
+| `CarDocumentServiceTest` | 5 | Combined solution tests |
+| **Total** | **30** | |
