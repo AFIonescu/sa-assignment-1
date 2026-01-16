@@ -47,17 +47,17 @@ mvn clean compile
 
 ### Run Document Editor
 ```bash
-mvn exec:java -Dexec.mainClass="org.example.creational.DocumentEditor"
+java -cp target/classes org.example.creational.DocumentEditor
 ```
 
 ### Run Car Configuration
 ```bash
-mvn exec:java -Dexec.mainClass="org.example.creational.CarConfiguration"
+java -cp target/classes org.example.creational.CarConfiguration
 ```
 
 ### Run Combined System
 ```bash
-mvn exec:java -Dexec.mainClass="org.example.creational.CarDocumentSystem"
+java -cp target/classes org.example.creational.CarDocumentSystem
 ```
 
 ## Tests
