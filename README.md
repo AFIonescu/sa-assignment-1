@@ -66,7 +66,7 @@ java -cp target/classes org.example.creational.CarDocumentSystem
 mvn test
 ```
 
-- 23 tests
-- 97% coverage
+- 45 tests
+- 98% coverage
 
 Coverage report: `target/site/jacoco/index.html`

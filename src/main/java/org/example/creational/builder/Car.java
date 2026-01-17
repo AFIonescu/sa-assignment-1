@@ -1,19 +1,14 @@
 package org.example.creational.builder;
 
 public class Car {
-    // Engine
     private String engine;
-    // Transmission
     private String transmission;
-    // Interior features
     private boolean hasLeatherSeats;
     private boolean hasGPS;
     private boolean hasSoundSystem;
-    // Exterior options
     private String color;
     private String rims;
     private boolean hasSunroof;
-    // Safety features
     private boolean hasABS;
     private boolean hasAirbags;
     private boolean hasRearCamera;
@@ -30,6 +25,50 @@ public class Car {
         this.hasABS = builder.hasABS;
         this.hasAirbags = builder.hasAirbags;
         this.hasRearCamera = builder.hasRearCamera;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public boolean hasLeatherSeats() {
+        return hasLeatherSeats;
+    }
+
+    public boolean hasGPS() {
+        return hasGPS;
+    }
+
+    public boolean hasSoundSystem() {
+        return hasSoundSystem;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getRims() {
+        return rims;
+    }
+
+    public boolean hasSunroof() {
+        return hasSunroof;
+    }
+
+    public boolean hasABS() {
+        return hasABS;
+    }
+
+    public boolean hasAirbags() {
+        return hasAirbags;
+    }
+
+    public boolean hasRearCamera() {
+        return hasRearCamera;
     }
 
     @Override
@@ -111,7 +150,20 @@ public class Car {
         }
 
         public Car build() {
+            validate();
             return new Car(this);
+        }
+
+        private void validate() {
+            if (engine == null || engine.isEmpty()) {
+                throw new IllegalStateException("Engine is required");
+            }
+            if (transmission == null || transmission.isEmpty()) {
+                throw new IllegalStateException("Transmission is required");
+            }
+            if (color == null || color.isEmpty()) {
+                throw new IllegalStateException("Color is required");
+            }
         }
     }
 }

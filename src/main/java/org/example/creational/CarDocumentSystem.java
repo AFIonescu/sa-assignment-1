@@ -7,12 +7,30 @@ import org.example.creational.factory.DocumentFactory;
 public class CarDocumentSystem {
 
     public static String generateCarDescription(Car car) {
-        return car.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Car Configuration Report\n");
+        sb.append("========================\n\n");
+        sb.append("Engine: ").append(car.getEngine()).append("\n");
+        sb.append("Transmission: ").append(car.getTransmission()).append("\n");
+        sb.append("Color: ").append(car.getColor()).append("\n");
+        sb.append("\nInterior Features:\n");
+        sb.append("  - Leather Seats: ").append(car.hasLeatherSeats() ? "Yes" : "No").append("\n");
+        sb.append("  - GPS: ").append(car.hasGPS() ? "Yes" : "No").append("\n");
+        sb.append("  - Sound System: ").append(car.hasSoundSystem() ? "Yes" : "No").append("\n");
+        sb.append("\nExterior Options:\n");
+        sb.append("  - Rims: ").append(car.getRims() != null ? car.getRims() : "Standard").append("\n");
+        sb.append("  - Sunroof: ").append(car.hasSunroof() ? "Yes" : "No").append("\n");
+        sb.append("\nSafety Features:\n");
+        sb.append("  - ABS: ").append(car.hasABS() ? "Yes" : "No").append("\n");
+        sb.append("  - Airbags: ").append(car.hasAirbags() ? "Yes" : "No").append("\n");
+        sb.append("  - Rear Camera: ").append(car.hasRearCamera() ? "Yes" : "No").append("\n");
+        return sb.toString();
     }
 
     public static Document createCarDocument(Car car, String documentType) {
         Document doc = DocumentFactory.createDocument(documentType);
-        System.out.println("Created " + documentType + " document for: " + car);
+        String carDescription = generateCarDescription(car);
+        doc.setContent(carDescription);
         return doc;
     }
 
@@ -33,15 +51,26 @@ public class CarDocumentSystem {
                 .build();
 
         System.out.println("Configured car: " + car);
+        System.out.println();
 
-        // Create documents describing the car using Factory
+        // Create PDF document for the car
         Document pdfDoc = createCarDocument(car, "PDF");
         pdfDoc.open();
+        pdfDoc.display();
+        pdfDoc.save();
+        System.out.println();
 
+        // Create Word document for the car
         Document wordDoc = createCarDocument(car, "Word");
         wordDoc.open();
+        wordDoc.display();
+        wordDoc.save();
+        System.out.println();
 
+        // Create HTML document for the car
         Document htmlDoc = createCarDocument(car, "HTML");
         htmlDoc.open();
+        htmlDoc.display();
+        htmlDoc.save();
     }
 }
